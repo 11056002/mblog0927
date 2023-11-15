@@ -20,6 +20,16 @@ def showpost(request, slug):
     #select* from post where slug = %slug
     return render(request, 'post.html', locals())
 
+import random
+def about(request, num = -1):
+    quotes = ["今日事，今日畢","失敗為成功之母","有志者，事竟成","一日之計在於晨"]
+    if num == -1 or num >4:
+        quote = random.choice(quotes)
+    else:
+        quote = quotes[num]
+    
+    return render(request, 'about.html', locals())
+
 
 
 '''
