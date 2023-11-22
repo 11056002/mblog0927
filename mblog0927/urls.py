@@ -23,4 +23,8 @@ urlpatterns = [
     path('post/<slug:slug>/',mv.showpost,),
     path('about/',mv.about),
     path('about/<int:num>',mv.about),
+    path('carlist/', mv.carlist),
+    path('carlist/<int:maker>/', mv.carlist, name='carlist-url'),
+
+    
 ]
