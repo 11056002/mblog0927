@@ -1,6 +1,16 @@
 {% extends "base2.html" %}
 {% block title %}歡迎光臨我的部落格{% endblock title %}
-{% block headmessage %} <h3 style='font-family:標楷體;'>本站文章列表</a> {% endblock headmessage %} 
+{% block headmessage %} 
+<h3 style='font-family:標楷體;'>本站文章列表</a> 
+<label for="byear">下拉選單年分</label>
+<select name="byear">
+    {% for year in years%}
+    <option value="{{year}}">西元{{year}}</opiton>
+{% endfor %}
+</select>
+    
+{% endblock headmessage %} 
+
 {% block content %} 
 
 {% for post in posts %}

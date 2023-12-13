@@ -6,6 +6,7 @@ class Post(models.Model):
     slug = models.CharField(max_length = 200)
     body = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
+    category = models.TextField(null=True)
     
     class Meta:
         ordering = ('-pub_date', )

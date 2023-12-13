@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from mysite.models import Post,Comments
+from mysite.models import Post, Comments
 from django.http import HttpResponse
 from datetime import datetime
 from django.shortcuts import redirect
@@ -19,6 +19,12 @@ def showpost(request, slug):
     post = Post.objects.get(slug=slug) 
     return render(request, 'post.html', locals())
     #select * from post where slug=%slug
+    
+def show_comments(request, post_id):
+    #comments = Comment.objects.filter(post=post_id)
+    comments = Post.objects.get(id=post_id).comment_set.all()
+    return render(request, 'comments.html', locals())
+    
     
 import random
 def about(request, num=-1):
@@ -50,10 +56,6 @@ def carlist(request, maker=0):
     cars = car_list[maker]
     return render(request, 'carlist.html', locals())
 
-def show_comments(request, post_id=0):
-    comments = Comments.objects.filter(post_id=post_id)
-    return render(request, 'comments.html', locals())
-
 '''
 def homepage(request):
     posts = Post.objects.all() #select * from post
@@ -62,3 +64,25 @@ def homepage(request):
         post_lists.append(f'No. {counter}-{post} <br>')
     return HttpResponse(post_lists)
 '''
+
+def new_post(request):
+    print(f'form method: {request.method}')
+    if request.method == 'GET':
+        return render(request, 'myform_1.html', locals())
+    elif request.method == 'POST':
+        title = request.POST['title']
+        slug = request.POST['slug']
+        content = request.POST['content']
+        category = request.POST.getlist('category')
+        post = Post(title=title, slug=slug, body=content, category=category)
+        post.save()
+        return render(request, 'myform_1.html', locals())
+    '''
+    try:
+        username = request.GET['user_id']
+        password = request.GET['password']
+        print(f'username:{username}, password:{password}')
+        return render(request, 'myform_1.html', locals())
+    except:
+        return render(request, 'myform_1.html', locals())
+    '''
