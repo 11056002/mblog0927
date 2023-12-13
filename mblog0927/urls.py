@@ -16,17 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mysite import views
+from mysite import views as siteviews
+from mytest import views as testviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage, name="homepage"),
-    path('post/<slug:slug>/', views.showpost, name="showpost"),
-    path('post/', views.show_all_posts, name="show-all-posts"),
-    path('post/<int:post_id>/comments', views.show_comments, name='show-comments'),
-    path('about/', views.about),
-    path('about/<int:num>', views.about, name='about'),
-    path('carlist/', views.carlist),
-    path('carlist/<int:maker>/', views.carlist, name='carlist-url'),
-    path('post/new', views.new_post, name="post-new"),
+    path('', siteviews.homepage, name="homepage"),
+    path('post/<slug:slug>/', siteviews.showpost, name="showpost"),
+    path('post/', siteviews.show_all_posts, name="show-all-posts"),
+    path('post/<int:post_id>/comments', siteviews.show_comments, name='show-comments'),
+    path('about/', siteviews.about),
+    path('about/<int:num>', siteviews.about, name='about'),
+    path('carlist/', siteviews.carlist),
+    path('carlist/<int:maker>/', siteviews.carlist, name='carlist-url'),
+    path('post/new', siteviews.new_post, name="post-new"),
+    path('test/', testviews.index, name="test-new")
 ]
